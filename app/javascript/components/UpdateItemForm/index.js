@@ -28,7 +28,21 @@ const UpdateItemForm = ({
                   title,
                   description,
                   imageUrl
-                }
+                },
+                // adding the second argument to 'updateItem' method
+                optimisticResponse: {
+                  __typename: 'Mutation',
+                  updateItem: {
+                    __typename: 'UpdateItemMutationPayload',
+                    item: {
+                      id,
+                      __typename: 'Item',
+                      title,
+                      description,
+                      imageUrl,
+                    },
+                  },
+                },
               });
               onClose();
             }}
