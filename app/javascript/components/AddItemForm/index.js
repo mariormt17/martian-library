@@ -1,7 +1,8 @@
-import React from "react";
-import { Mutation } from "react-apollo";
-import { AddItemMutation } from "./operations.graphql";
-import ProcessItemForm from "../ProcessItemForm";
+import React from 'react';
+import { Mutation } from 'react-apollo';
+import { AddItemMutation } from './operations.graphql';
+import ProcessItemForm from '../ProcessItemForm';
+import { LibraryQuery } from '../Library/operations.graphql';
 
 const AddItemForm = () => (
   <Mutation mutation={AddItemMutation}>
@@ -14,8 +15,22 @@ const AddItemForm = () => (
             variables: {
               title,
               description,
-              imageUrl
-            }
+              imageUrl,
+            },
+            update: (cache, { data: { addItem } }) => {
+              {
+                const item = addItem.item;
+                if (item) {
+                  const currentItems = cache.readQuery({ query: LibraryQuery });
+                  cache.writeQuery({
+                    query: LibraryQuery,
+                    data: {
+                      items: [item].concat(currentItems.items),
+                    },
+                  });
+                }
+              }
+            },
           })
         }
       />
