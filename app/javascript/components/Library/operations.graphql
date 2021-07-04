@@ -1,3 +1,5 @@
+#import '../../fragments/Item.graphql'
+
 query LibraryQuery {
   items {
     ...ItemFragment
