@@ -2,6 +2,7 @@
   "name": "martian-library",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.3.21",
     "@babel/preset-react": "^7.13.13",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
